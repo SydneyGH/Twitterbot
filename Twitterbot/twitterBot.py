@@ -31,12 +31,12 @@ def new_tweet(file_name, read_id):
 tweets = api.mentions_timeline(last_tweet(file_name), tweet_mode='extended')
 
 
-# this will communicate with users once 'jeffiscode' is tagged
+# this will communicate with users once the #HASHTAG OR @SCREEN_NAME is tagged
 def auto():
     for tweet in tweets:
-        if {'ENTER EITHER HASHTAG OR @SCREEN_NAME'} in tweet.full_text.lower():
+        if {'ENTER EITHER #HASHTAG OR @SCREEN_NAME'} in tweet.full_text.lower():
             print('tweet from ' + tweet.user.name + str(tweet.id) + ' - ' + tweet.full_text)
-            api.update_status('@' + tweet.user.screen_name + ' Yes, I am here!', tweet.id)
+            api.update_status('{@ OR #}' + tweet.user.screen_name + ' HELLO TWITTER WORLD!', tweet.id)
             api.retweet(tweet.id)
             api.create_favorite(tweet.id)
             new_tweet(file_name, tweet.id)
