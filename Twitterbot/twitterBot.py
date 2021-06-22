@@ -1,11 +1,10 @@
 import tweepy
 import time
-import mySecrets
 
-consumer_key = mySecrets.secrets['consumer_key']
-consumer_secret = mySecrets.secrets['consumer_secret']
-key = mySecrets.secrets['key']
-secret = mySecrets.secrets['secret']
+consumer_key = {'KEY HERE'}
+consumer_secret = {'KEY HERE'}
+key = {'KEY HERE'}
+secret = {'KEY HERE'}
 
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -35,7 +34,7 @@ tweets = api.mentions_timeline(last_tweet(file_name), tweet_mode='extended')
 # this will communicate with users once 'jeffiscode' is tagged
 def auto():
     for tweet in tweets:
-        if '@jeffiscode' in tweet.full_text.lower():
+        if {'ENTER EITHER HASHTAG OR @SCREEN_NAME'} in tweet.full_text.lower():
             print('tweet from ' + tweet.user.name + str(tweet.id) + ' - ' + tweet.full_text)
             api.update_status('@' + tweet.user.screen_name + ' Yes, I am here!', tweet.id)
             api.retweet(tweet.id)
@@ -76,7 +75,7 @@ def unfollow_users():
 
     for unfollower in friends:
         if unfollower not in followerS:
-            ask = input('would you like to unfollow ' + unfollower.name + ' (y/n)? ')
+            ask = input('Would you like to unfollow ' + unfollower.name + ' (y/n)? ')
             if ask == 'y':
                 print('This user: ' + unfollower.name + ' has unfollowed you, we did the same')
                 unfollower.unfollow()
@@ -88,8 +87,8 @@ def follow(user):
         api.create_friendship(user)
         print('Friend request sent to ' + user)
         time.sleep(5)
-    except tweepy.TweepError as b:
-        print(b.reason)
+    except tweepy.TweepError as c:
+        print(c.reason)
         time.sleep(2)
 
 # unfollow an individual user
@@ -98,15 +97,15 @@ def unfollow(user):
         api.destroy_friendship(user)
         print("Succesfully unfollowed " + user)
         time.sleep(5)
-    except tweepy.TweepError as c:
-        print(c.reason)
+    except tweepy.TweepError as d:
+        print(d.reason)
         time.sleep(2)
 
 
 if __name__ == '__main__':
-    # auto()
-    # search()
-    # follow_users()
-    # unfollow_users()
-    # follow('yodemik')
-    # unfollow()
+    auto()
+    search()
+    follow_users()
+    unfollow_users()
+    follow()
+    unfollow()
